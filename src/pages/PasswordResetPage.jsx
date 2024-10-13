@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+
 
 const PasswordResetPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+    const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    const navigate = useNavigate(); // Initialize useNavigate to redirect the user
+    const navigate = useNavigate();
 
     // Toggle the password visibility
     const togglePasswordVisibility = () => {
@@ -21,7 +24,7 @@ const PasswordResetPage = () => {
         return passwordRegex.test(password);
     };
 
-    const handlePasswordReset = (e) => {
+    const handlePasswordReset = async (e) => {
         e.preventDefault();
 
         // Validate password
@@ -39,25 +42,30 @@ const PasswordResetPage = () => {
         // Clear error message if validation is successful
         setErrorMessage('');
 
-        // Simulate API call for password reset (this will be replaced with actual API call later)
-        try {
-            // Simulate API response
-            const response = { status: 200 }; // Simulated response (200: success, 400: failure)
+        setTimeout(() => {
+            navigate('/welcome');
+        }, 2000);
+        // API call to reset password
+        {/*try {
+            const response = await axios.post('https://api.example.com/reset-password', {
+                password,
+                token: 'secure-token-from-email' 
+            });
 
             if (response.status === 200) {
                 setSuccessMessage('Your password has been reset successfully');
                 setErrorMessage('');
 
-                // Redirect to the dashboard after successful password reset
+               
                 setTimeout(() => {
-                    navigate('/dashboard'); // Navigate to the dashboard route
-                }, 2000); // Adding a delay of 2 seconds before redirection to show the success message
+                    navigate('/welcome'); 
+                }, 2000); 
             } else {
                 setErrorMessage('There was an error resetting your password. Please try again.');
             }
         } catch (error) {
             setErrorMessage('There was an error processing your request. Please try again later.');
-        }
+        }*/}
     };
 
     return (
