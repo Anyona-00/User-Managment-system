@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-//import { login } from '../api'; // Placeholder for backend API integration
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
         return emailRegex.test(email);
     };
-
 
     const validatePassword = (password) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // At least 8 characters, letters, and numbers
@@ -37,13 +39,6 @@ const LoginPage = () => {
         setErrorMessage('');
 
         // Placeholder for backend login logic
-        {/*try {
-            const response = await login(email, password); // Replace with actual API call
-            localStorage.setItem('token', response.data.token); // Store the JWT token
-            console.log('Login successful:', response.data);
-        } catch (error) {
-            setErrorMessage('Invalid login credentials or server error');
-        }*/}
     };
 
     return (
@@ -66,14 +61,30 @@ const LoginPage = () => {
                     {/* Password Input */}
                     <div className="mb-4">
                         <label className="block text-gray-700 mb-2">Password</label>
-                        <input
-                            type="password"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className="absolute inset-y-0 right-0 px-3 flex items-center"
+                            >
+                                {showPassword ? '🙈' : '👁️'}
+                            </button>
+                        </div>
                     </div>
+
+                    {/* Forgot Password Link */}
+                    <p className="mb-4 text-right">
+                        <Link to="/forgot-password" className="text-blue-500 hover:underline">
+                            Forgot Password?
+                        </Link>
+                    </p>
 
                     {/* Error Message */}
                     {errorMessage && (
@@ -88,6 +99,7 @@ const LoginPage = () => {
                         Login
                     </button>
                 </form>
+
                 {/* Sign Up Link */}
                 <p className="mt-6 text-center">
                     Don't have an account?{' '}
