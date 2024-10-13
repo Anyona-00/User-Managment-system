@@ -6,6 +6,12 @@ const SignUpPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
 
     // Email validation function
     const validateEmail = (email) => {
@@ -65,25 +71,43 @@ const SignUpPage = () => {
                     {/* Password Input */}
                     <div className="mb-4">
                         <label className="block text-gray-700 mb-2">Password</label>
-                        <input
-                            type="password"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className="absolute inset-y-0 right-0 px-3 flex items-center"
+                            >
+                                {showPassword ? '🙈' : '👁️'} {/* You can use icons here */}
+                            </button>
+                        </div>
                     </div>
 
                     {/* Confirm Password Input */}
                     <div className="mb-4">
                         <label className="block text-gray-700 mb-2">Confirm Password</label>
-                        <input
-                            type="password"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className="absolute inset-y-0 right-0 px-3 flex items-center"
+                            >
+                                {showPassword ? '🙈' : '👁️'} {/* You can use icons here */}
+                            </button>
+                        </div>
                     </div>
 
                     {/* Error Message */}
