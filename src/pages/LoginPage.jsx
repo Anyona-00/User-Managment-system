@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate(); // Initialize navigate
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -38,7 +40,31 @@ const LoginPage = () => {
         // Clear error message before proceeding
         setErrorMessage('');
 
-        // Placeholder for backend login logic
+        navigate('/welcome')
+
+        // Simulated Backend API Call with Axios (ready for real integration)
+        {/*try {
+            const response = await axios.post('https://api.example.com/login', {
+                email,
+                password
+            });
+
+
+            if (response.status === 200) {
+                const { token } = response.data;  // Assuming the token is in the response
+                localStorage.setItem('token', token);  // Store JWT token in local storage
+                navigate('/welcome');  // Redirect to welcome page after successful login
+            } else {
+                setErrorMessage('Login failed. Please check your credentials.');
+            }
+        } catch (error) {
+            //  error scenarios
+            if (error.response && error.response.status === 401) {
+                setErrorMessage('Invalid login credentials. Please try again.');
+            } else {
+                setErrorMessage('Server error. Please try again later.');
+            }
+        }*/}
     };
 
     return (
