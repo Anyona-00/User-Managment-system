@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUpPage = () => {
     const [email, setEmail] = useState('');
@@ -7,11 +8,11 @@ const SignUpPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-
 
     // Email validation function
     const validateEmail = (email) => {
@@ -25,7 +26,7 @@ const SignUpPage = () => {
         return passwordRegex.test(password);
     };
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
 
         // Frontend validation
@@ -46,9 +47,34 @@ const SignUpPage = () => {
 
         // Clear error message if everything is valid
         setErrorMessage('');
+        navigate('/otp');
 
-        // Simulate backend call here for registration (this will be replaced with actual API call later)
-        console.log('User registered:', { email, password });
+        // API request to register the user
+        {/*try {
+            const response = await axios.post('https://api.example.com/signup', {
+                email,
+                password,
+            });
+
+            // Assuming the API response includes the user ID or a token to verify the OTP
+            if (response.status === 200) {
+                const { userId } = response.data;  // Example: API might return a user ID
+
+                // Store user ID or other data if necessary
+                localStorage.setItem('userId', userId);
+
+                // Redirect to the OTP page after successful signup
+                navigate('/otp');
+            } else {
+                setErrorMessage('Signup failed. Please try again.');
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setErrorMessage('User already exists or invalid input.');
+            } else {
+                setErrorMessage('Server error. Please try again later.');
+            }
+        }*/}
     };
 
     return (
@@ -84,7 +110,7 @@ const SignUpPage = () => {
                                 onClick={togglePasswordVisibility}
                                 className="absolute inset-y-0 right-0 px-3 flex items-center"
                             >
-                                {showPassword ? '🙈' : '👁️'} {/* You can use icons here */}
+                                {showPassword ? '🙈' : '👁️'}
                             </button>
                         </div>
                     </div>
@@ -105,7 +131,7 @@ const SignUpPage = () => {
                                 onClick={togglePasswordVisibility}
                                 className="absolute inset-y-0 right-0 px-3 flex items-center"
                             >
-                                {showPassword ? '🙈' : '👁️'} {/* You can use icons here */}
+                                {showPassword ? '🙈' : '👁️'}
                             </button>
                         </div>
                     </div>
