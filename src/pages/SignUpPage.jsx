@@ -47,7 +47,7 @@ const SignUpPage = () => {
 
         // Clear error message if everything is valid
         setErrorMessage('');
-        navigate('/otp');
+        navigate('/otp-verification');
 
         // API request to register the user
         {/*try {
