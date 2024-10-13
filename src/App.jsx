@@ -5,7 +5,7 @@ import SignUpPage from './pages/SignUpPage';
 import OtpVerificationPage from './pages/OtpVerificationPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import PasswordResetPage from './pages/PasswordResetPage';
-
+import WelcomePage from './pages/WelcomePage'
 
 function App() {
   return (
