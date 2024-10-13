@@ -4,6 +4,8 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import OtpVerificationPage from './pages/OtpVerificationPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import PasswordResetPage from './pages/PasswordResetPage';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/otp-verification" element={<OtpVerificationPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<PasswordResetPage />} />
       </Routes>
     </Router>
   );
