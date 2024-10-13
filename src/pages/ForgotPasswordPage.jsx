@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-
-
 
     // Email validation function
     const validateEmail = (email) => {
@@ -24,13 +23,16 @@ const ForgotPasswordPage = () => {
 
         // Clear error message if validation is successful
         setErrorMessage('');
+        setSuccessMessage('Password reset link has been sent to your email');
 
-        // Simulate API call for password reset (this will be replaced with an actual API call later)
-        try {
-            // Simulate API response - Replace this with actual API logic
-            const response = { status: 200 }; // Simulated response (200: success, 404: email not found)
+        // API call to send password reset link
+        {/* try {
+            const response = await axios.post('https://api.example.com/forgot-password', {
+                email,
+            });
 
             if (response.status === 200) {
+                // Show success message when email is sent
                 setSuccessMessage('Password reset link has been sent to your email');
                 setErrorMessage('');
             } else {
@@ -38,7 +40,7 @@ const ForgotPasswordPage = () => {
             }
         } catch (error) {
             setErrorMessage('There was an error processing your request. Please try again later.');
-        }
+        }*/}
     };
 
     return (
