@@ -6,6 +6,7 @@ const ForgotPasswordPage = () => {
     const [successMessage, setSuccessMessage] = useState('');
 
 
+
     // Email validation function
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
