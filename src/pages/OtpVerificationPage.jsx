@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const OtpVerificationPage = () => {
     const [otp, setOtp] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate(); // To redirect after successful OTP verification
+    const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate();
 
     // Function to validate the OTP (assuming it's 6 digits for this example)
     const validateOtp = (otp) => {
@@ -12,7 +14,8 @@ const OtpVerificationPage = () => {
         return otpRegex.test(otp);
     };
 
-    const handleOtpSubmit = (e) => {
+    // Function to handle OTP submission
+    const handleOtpSubmit = async (e) => {
         e.preventDefault();
 
         // Validate OTP
@@ -24,12 +27,42 @@ const OtpVerificationPage = () => {
         // Clear error message if OTP is valid
         setErrorMessage('');
 
-        // Simulate API call to verify OTP (this will be replaced with actual API call)
-        console.log('OTP entered:', otp);
+        navigate('/welcome');
 
-        // Simulate successful OTP verification
-        // Redirect to another page (e.g., dashboard) after successful verification
-        navigate('/dashboard'); // Replace '/dashboard' with the actual route
+        // API call to verify OTP
+        // try {
+        //     const response = await axios.post('https://api.example.com/verify-otp', {
+        //         otp,
+        //         userId: localStorage.getItem('userId'), // Assuming userId is stored in localStorage after signup
+        //     });
+
+        //     // If OTP verification is successful
+        //     if (response.status === 200) {
+        //         setSuccessMessage('OTP verified successfully!');
+        //         navigate('/welcome'); // Redirect to welcome screen after successful OTP verification
+        //     } else {
+        //         setErrorMessage('Invalid OTP. Please try again.');
+        //     }
+        // } catch (error) {
+        //     setErrorMessage('Server error. Please try again later.');
+        // }
+    };
+
+    // Function to resend the OTP
+    const handleResendOtp = async () => {
+        // try {
+        //     const response = await axios.post('https://api.example.com/resend-otp', {
+        //         userId: localStorage.getItem('userId'), // Assuming userId is stored in localStorage after signup
+        //     });
+
+        //     if (response.status === 200) {
+        //         setSuccessMessage('OTP has been resent successfully.');
+        //     } else {
+        //         setErrorMessage('Failed to resend OTP. Please try again.');
+        //     }
+        // } catch (error) {
+        //     setErrorMessage('Server error. Please try again later.');
+        // }
     };
 
     return (
@@ -54,6 +87,11 @@ const OtpVerificationPage = () => {
                         <p className="text-red-500 mb-4">{errorMessage}</p>
                     )}
 
+                    {/* Success Message */}
+                    {successMessage && (
+                        <p className="text-green-500 mb-4">{successMessage}</p>
+                    )}
+
                     {/* Submit Button */}
                     <button
                         type="submit"
@@ -63,8 +101,11 @@ const OtpVerificationPage = () => {
                     </button>
                 </form>
 
-                {/* If needed, provide a "Resend OTP" link */}
-                <p className="mt-6 text-center text-blue-500 hover:underline cursor-pointer">
+                {/* Resend OTP Link */}
+                <p
+                    className="mt-6 text-center text-blue-500 hover:underline cursor-pointer"
+                    onClick={handleResendOtp}
+                >
                     Resend OTP
                 </p>
             </div>
