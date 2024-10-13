@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate(); // Initialize navigate
 
     // Email validation function
     const validateEmail = (email) => {
@@ -25,8 +27,14 @@ const ForgotPasswordPage = () => {
         setErrorMessage('');
         setSuccessMessage('Password reset link has been sent to your email');
 
+
+        setTimeout(() => {
+            navigate('/reset-password'); // Redirect to password reset page after 5 seconds
+        }, 5000);
+
         // API call to send password reset link
-        {/* try {
+        /*
+        try {
             const response = await axios.post('https://api.example.com/forgot-password', {
                 email,
             });
@@ -35,12 +43,18 @@ const ForgotPasswordPage = () => {
                 // Show success message when email is sent
                 setSuccessMessage('Password reset link has been sent to your email');
                 setErrorMessage('');
+                
+                // Redirect to password reset page after 5 seconds
+                setTimeout(() => {
+                    navigate('/password-reset');
+                }, 5000);
             } else {
                 setErrorMessage('Email not found');
             }
         } catch (error) {
             setErrorMessage('There was an error processing your request. Please try again later.');
-        }*/}
+        }
+        */
     };
 
     return (
