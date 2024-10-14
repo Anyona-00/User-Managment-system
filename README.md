@@ -26,7 +26,7 @@ src/
 │   └── WelcomePage.test.js
 │
 └── index.js                 # Entry point for the React app
-
+```
 
 # Adumur User Management
 
