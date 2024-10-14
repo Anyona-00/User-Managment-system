@@ -1,6 +1,6 @@
 # **Adamur Entry Test - User Management System**
 
-This project is a user management system built as part of the Adamur Entry Test. It provides user registration, secure login, email-based account verification using OTP, and password reset functionality. The system is designed to be scalable, secure, and adaptable, suitable for integration into educational platforms like Adamur.
+This project is the Front-End of a user management system I built as part of the Adamur Entry Test. It provides user registration, secure login, email-based account verification using OTP, and password reset functionality. The system is designed to be scalable, secure, and adaptable, suitable for integration into educational platforms like Adamur.
 
 ---
 
